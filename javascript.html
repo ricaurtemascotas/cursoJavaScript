@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Intensivo de JavaScript - 10 Días</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary-color: #8b5cf6;
+            --dark-bg: #0f172a;
+            --darker-bg: #020617;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            background-color: var(--darker-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .header-desc {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .progress-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background-color: #334155;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 6px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .day-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .day-counter {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary-color);
+        }
+
+        .checklist {
+            list-style-type: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .checkbox-container {
+            position: relative;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .custom-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .custom-checkbox:hover {
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox.checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .item-text {
+            flex-grow: 1;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .item-text.completed {
+            color: var(--text-secondary);
+            text-decoration: line-through;
+        }
+
+        .day-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tech-icon {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        .total-stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .days-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .total-stats {
+                flex-direction: column;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-code tech-icon"></i> Curso Intensivo de JavaScript</h1>
+            <p class="subtitle">De cero a experto en 10 días</p>
+            <p class="header-desc">
+                Este curso te guiará desde los fundamentos básicos hasta conceptos avanzados de JavaScript, 
+                enfocándonos en el lenguaje mismo. Cada día está cuidadosamente planificado para optimizar 
+                tu aprendizaje y práctica.
+            </p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-info">
+                <span>Progreso total del curso</span>
+                <span id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar"></div>
+            </div>
+            <div class="controls">
+                <button id="reset-btn" class="btn btn-outline">
+                    <i class="fas fa-redo"></i> Reiniciar Progreso
+                </button>
+                <button id="save-btn" class="btn">
+                    <i class="fas fa-save"></i> Guardar Progreso
+                </button>
+            </div>
+        </div>
+
+        <div class="total-stats">
+            <div class="stat-box">
+                <div class="stat-number" id="total-completed">0</div>
+                <div class="stat-label">Lecciones completadas</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="total-lessons">86</div>
+                <div class="stat-label">Total de lecciones</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="days-completed">0</div>
+                <div class="stat-label">Días completados</div>
+            </div>
+        </div>
+
+        <div class="days-container" id="days-container">
+            <!-- Los días se generarán dinámicamente con JavaScript -->
+        </div>
+
+        <div class="footer">
+            <p>Curso creado como guía de estudio intensivo de JavaScript | 
+                <i class="fas fa-laptop-code tech-icon"></i> Diseño tecnológico con temática oscura
+            </p>
+            <p style="margin-top: 10px;">Tu progreso se guarda automáticamente en tu navegador</p>
+        </div>
+    </div>
+
+    <script>
+        // Datos del curso divididos en 10 días
+        const courseData = [
+            {
+                day: 1,
+                title: "Día 1: Introducción y Fundamentos Básicos",
+                topics: [
+                    "Una introducción a JavaScript",
+                    "Manuales y especificaciones",
+                    "Editores de Código",
+                    "Consola de desarrollador",
+                    "¡Hola, mundo!",
+                    "Estructura del código",
+                    "El modo moderno, 'use strict'",
+                    "Variables",
+                    "Tipos de datos",
+                    "Interacción: alert, prompt, confirm"
+                ]
+            },
+            {
+                day: 2,
+                title: "Día 2: Operadores y Control de Flujo",
+                topics: [
+                    "Conversiones de Tipos",
+                    "Operadores básicos, matemáticas",
+                    "Comparaciones",
+                    "Ejecución condicional: if, '?'",
+                    "Operadores Lógicos",
+                    "Operador Nullish Coalescing '??'",
+                    "Bucles: while y for",
+                    "La sentencia 'switch'",
+                    "Funciones",
+                    "Expresiones de función"
+                ]
+            },
+            {
+                day: 3,
+                title: "Día 3: Calidad de Código y Objetos",
+                topics: [
+                    "Funciones Flecha, lo básico",
+                    "Calidad del código",
+                    "Debugging en el navegador",
+                    "Estilo de codificación",
+                    "Comentarios",
+                    "Código ninja",
+                    "Automatización de pruebas con Mocha",
+                    "Polyfills y transpiladores",
+                    "Objetos: lo básico",
+                    "Referencias de objetos y copia"
+                ]
+            },
+            {
+                day: 4,
+                title: "Día 4: Métodos, Constructores y Tipos Avanzados",
+                topics: [
+                    "Recolección de basura",
+                    "Métodos de objeto, 'this'",
+                    "Constructor, operador 'new'",
+                    "Encadenamiento opcional '?.'",
+                    "Tipo Symbol",
+                    "Conversión de objeto a valor primitivo",
+                    "Métodos en tipos primitivos",
+                    "Números",
+                    "Strings",
+                    "Arrays"
+                ]
+            },
+            {
+                day: 5,
+                title: "Día 5: Métodos de Arrays, Map, Set y Objetos",
+                topics: [
+                    "Métodos de arrays",
+                    "Iterables",
+                    "Map y Set",
+                    "WeakMap y WeakSet",
+                    "Object.keys, values, entries",
+                    "Asignación desestructurante",
+                    "Fecha y Hora",
+                    "Métodos JSON, toJSON",
+                    "Recursión y pila",
+                    "Parámetros Rest y operador Spread"
+                ]
+            },
+            {
+                day: 6,
+                title: "Día 6: Funciones Avanzadas y Programación",
+                topics: [
+                    "Ámbito de Variable y el concepto 'closure'",
+                    "La vieja 'var'",
+                    "Objeto Global",
+                    "Función como objeto, NFE",
+                    "La sintaxis 'new Function'",
+                    "Planificación: setTimeout y setInterval",
+                    "Decoradores y redirecciones, call/apply",
+                    "Función bind: vinculación de funciones",
+                    "Funciones de flecha revisadas",
+                    "Configuración de las propiedades de objetos"
+                ]
+            },
+            {
+                day: 7,
+                title: "Día 7: Propiedades, Prototipos y Clases",
+                topics: [
+                    "Indicadores y descriptores de propiedad",
+                    "'Getters' y 'setters' de propiedad",
+                    "Prototipos y herencia",
+                    "Herencia prototípica",
+                    "F.prototype",
+                    "Prototipos nativos",
+                    "Métodos prototipo, objetos sin __proto__",
+                    "Sintaxis básica de `class`",
+                    "Herencia de clase",
+                    "Propiedades y métodos estáticos"
+                ]
+            },
+            {
+                day: 8,
+                title: "Día 8: Clases Avanzadas y Manejo de Errores",
+                topics: [
+                    "Propiedades y métodos privados y protegidos",
+                    "Ampliación de clases nativas",
+                    "Comprobación de clase: 'instanceof'",
+                    "Los Mixins",
+                    "Manejo de errores, 'try...catch'",
+                    "Errores personalizados, extendiendo Error",
+                    "Introducción: callbacks",
+                    "Promesa",
+                    "Encadenamiento de promesas",
+                    "Manejo de errores con promesas"
+                ]
+            },
+            {
+                day: 9,
+                title: "Día 9: Promesas, Async/Await y Generadores",
+                topics: [
+                    "Promise API",
+                    "Promisificación",
+                    "Microtareas (Microtasks)",
+                    "Async/await",
+                    "Generadores",
+                    "Iteradores y generadores asíncronos",
+                    "Módulos, introducción",
+                    "Export e Import",
+                    "Importaciones dinámicas",
+                    "Proxy y Reflect"
+                ]
+            },
+            {
+                day: 10,
+                title: "Día 10: Temas Diversos y DOM",
+                topics: [
+                    "Eval: ejecutando una cadena de código",
+                    "Currificación",
+                    "Tipo de Referencia",
+                    "BigInt",
+                    "Unicode, String internals",
+                    "WeakRef y FinalizationRegistry",
+                    "Entorno del navegador, especificaciones",
+                    "Árbol del Modelo de Objetos del Documento (DOM)",
+                    "Recorriendo el DOM",
+                    "Buscar: getElement*, querySelector*"
+                ]
+            }
+        ];
+
+        // Estado del progreso
+        let progressState = {
+            totalLessons: 0,
+            completedLessons: 0,
+            days: []
+        };
+
+        // Inicializar el estado
+        function initializeProgressState() {
+            // Calcular el total de lecciones
+            let totalLessons = 0;
+            courseData.forEach(day => {
+                totalLessons += day.topics.length;
+                progressState.days[day.day] = {
+                    total: day.topics.length,
+                    completed: 0,
+                    topics: Array(day.topics.length).fill(false)
+                };
+            });
+            
+            progressState.totalLessons = totalLessons;
+            
+            // Cargar el estado guardado desde localStorage
+            const savedState = localStorage.getItem('jsCourseProgress');
+            if (savedState) {
+                const parsedState = JSON.parse(savedState);
+                progressState.completedLessons = parsedState.completedLessons || 0;
+                progressState.days = parsedState.days || progressState.days;
+            }
+        }
+
+        // Renderizar los días
+        function renderDays() {
+            const container = document.getElementById('days-container');
+            container.innerHTML = '';
+            
+            courseData.forEach(dayData => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day-card';
+                
+                const dayState = progressState.days[dayData.day];
+                const completedCount = dayState ? dayState.completed : 0;
+                
+                dayElement.innerHTML = `
+                    <div class="day-header">
+                        <h3 class="day-title">${dayData.title}</h3>
+                        <div class="day-counter">${dayData.day}</div>
+                    </div>
+                    <ul class="checklist">
+                        ${dayData.topics.map((topic, index) => {
+                            const isChecked = dayState && dayState.topics[index];
+                            return `
+                                <li class="checklist-item">
+                                    <div class="checkbox-container">
+                                        <div class="custom-checkbox ${isChecked ? 'checked' : ''}" 
+                                             data-day="${dayData.day}" 
+                                             data-index="${index}"></div>
+                                    </div>
+                                    <span class="item-text ${isChecked ? 'completed' : ''}">
+                                        ${topic}
+                                    </span>
+                                </li>
+                            `;
+                        }).join('')}
+                    </ul>
+                    <div class="day-stats">
+                        <span>${completedCount}/${dayData.topics.length} completadas</span>
+                        <span>${dayData.topics.length} lecciones</span>
+                    </div>
+                `;
+                
+                container.appendChild(dayElement);
+            });
+            
+            // Añadir event listeners a los checkboxes
+            document.querySelectorAll('.custom-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', toggleCheckbox);
+            });
+            
+            updateProgress();
+        }
+
+        // Alternar estado del checkbox
+        function toggleCheckbox(event) {
+            const checkbox = event.target;
+            const day = parseInt(checkbox.getAttribute('data-day'));
+            const index = parseInt(checkbox.getAttribute('data-index'));
+            
+            // Toggle del estado
+            const isChecked = checkbox.classList.toggle('checked');
+            
+            // Actualizar estado en progressState
+            progressState.days[day].topics[index] = isChecked;
+            
+            // Actualizar contadores
+            const dayState = progressState.days[day];
+            dayState.completed = dayState.topics.filter(topic => topic).length;
+            
+            // Actualizar contador total
+            progressState.completedLessons = 0;
+            progressState.days.forEach(day => {
+                if (day) {
+                    progressState.completedLessons += day.completed;
+                }
+            });
+            
+            // Actualizar UI
+            const itemText = checkbox.closest('.checklist-item').querySelector('.item-text');
+            itemText.classList.toggle('completed', isChecked);
+            
+            const dayStats = checkbox.closest('.day-card').querySelector('.day-stats span:first-child');
+            dayStats.textContent = `${dayState.completed}/${dayState.total} completadas`;
+            
+            updateProgress();
+            saveProgress();
+        }
+
+        // Actualizar el progreso general
+        function updateProgress() {
+            // Actualizar barra de progreso
+            const progressPercentage = progressState.totalLessons > 0 
+                ? Math.round((progressState.completedLessons / progressState.totalLessons) * 100) 
+                : 0;
+            
+            document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+            document.getElementById('progress-percentage').textContent = `${progressPercentage}%`;
+            
+            // Actualizar estadísticas
+            document.getElementById('total-completed').textContent = progressState.completedLessons;
+            
+            // Calcular días completados (días con todas las lecciones completadas)
+            let daysCompleted = 0;
+            courseData.forEach(dayData => {
+                const dayState = progressState.days[dayData.day];
+                if (dayState && dayState.completed === dayState.total) {
+                    daysCompleted++;
+                }
+            });
+            
+            document.getElementById('days-completed').textContent = daysCompleted;
+        }
+
+        // Guardar progreso en localStorage
+        function saveProgress() {
+            localStorage.setItem('jsCourseProgress', JSON.stringify(progressState));
+            
+            // Mostrar notificación de guardado
+            const saveBtn = document.getElementById('save-btn');
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<i class="fas fa-check"></i> Guardado';
+            saveBtn.style.background = 'linear-gradient(to right, #10b981, #059669)';
+            
+            setTimeout(() => {
+                saveBtn.innerHTML = originalText;
+                saveBtn.style.background = 'linear-gradient(to right, var(--primary-color), var(--primary-dark))';
+            }, 1500);
+        }
+
+        // Reiniciar progreso
+        function resetProgress() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.')) {
+                localStorage.removeItem('jsCourseProgress');
+                initializeProgressState();
+                renderDays();
+            }
+        }
+
+        // Inicializar la aplicación
+        function initApp() {
+            initializeProgressState();
+            renderDays();
+            
+            // Añadir event listeners a los botones
+            document.getElementById('reset-btn').addEventListener('click', resetProgress);
+            document.getElementById('save-btn').addEventListener('click', saveProgress);
+        }
+
+        // Iniciar la aplicación cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
