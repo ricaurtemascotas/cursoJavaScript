@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Intensivo de JavaScript - 10 Días</title>
+    <title>Curso de JavaScript - Bloques Temáticos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -115,14 +115,14 @@
             margin-top: 20px;
         }
 
-        .days-container {
+        .blocks-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
             margin-top: 40px;
         }
 
-        .day-card {
+        .block-card {
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 25px;
@@ -133,12 +133,12 @@
             overflow: hidden;
         }
 
-        .day-card:hover {
+        .block-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .day-card::before {
+        .block-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -148,7 +148,7 @@
             background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
         }
 
-        .day-header {
+        .block-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -157,7 +157,7 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .day-title {
+        .block-title {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
@@ -166,14 +166,13 @@
         .day-counter {
             background-color: var(--dark-bg);
             color: var(--text-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            border-radius: 8px;
+            padding: 8px 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1rem;
             border: 2px solid var(--primary-color);
         }
 
@@ -243,7 +242,7 @@
             text-decoration: line-through;
         }
 
-        .day-stats {
+        .block-stats {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
@@ -327,9 +326,16 @@
             margin-top: 5px;
         }
 
+        .block-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .days-container {
+            .blocks-container {
                 grid-template-columns: 1fr;
             }
             
@@ -356,12 +362,12 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-code tech-icon"></i> Curso Intensivo de JavaScript</h1>
-            <p class="subtitle">De cero a experto en 10 días</p>
+            <h1><i class="fas fa-code tech-icon"></i> Curso Completo de JavaScript</h1>
+            <p class="subtitle">Organizado por bloques temáticos - Estudia a tu ritmo</p>
             <p class="header-desc">
-                Este curso te guiará desde los fundamentos básicos hasta conceptos avanzados de JavaScript, 
-                enfocándonos en el lenguaje mismo. Cada día está cuidadosamente planificado para optimizar 
-                tu aprendizaje y práctica.
+                Este curso está organizado en bloques temáticos. Cada bloque representa un día de estudio,
+                enfocándote en conceptos relacionados. Avanza a tu propio ritmo, marcando cada lección
+                completada.
             </p>
         </header>
 
@@ -393,17 +399,17 @@
                 <div class="stat-label">Total de lecciones</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number" id="days-completed">0</div>
-                <div class="stat-label">Días completados</div>
+                <div class="stat-number" id="blocks-completed">0</div>
+                <div class="stat-label">Bloques completados</div>
             </div>
         </div>
 
-        <div class="days-container" id="days-container">
-            <!-- Los días se generarán dinámicamente con JavaScript -->
+        <div class="blocks-container" id="blocks-container">
+            <!-- Los bloques se generarán dinámicamente con JavaScript -->
         </div>
 
         <div class="footer">
-            <p>Curso creado como guía de estudio intensivo de JavaScript | 
+            <p>Curso organizado por bloques temáticos | 
                 <i class="fas fa-laptop-code tech-icon"></i> Diseño tecnológico con temática oscura
             </p>
             <p style="margin-top: 10px;">Tu progreso se guarda automáticamente en tu navegador</p>
@@ -411,92 +417,128 @@
     </div>
 
     <script>
-        // Datos del curso divididos en 10 días
+        // Datos del curso organizados por bloques temáticos
         const courseData = [
             {
+                id: 1,
+                title: "Bloque 1: Introducción a JavaScript",
+                description: "Conceptos básicos y entorno de desarrollo",
                 day: 1,
-                title: "Día 1: Introducción y Fundamentos Básicos",
                 topics: [
                     "Una introducción a JavaScript",
                     "Manuales y especificaciones",
                     "Editores de Código",
-                    "Consola de desarrollador",
+                    "Consola de desarrollador"
+                ]
+            },
+            {
+                id: 2,
+                title: "Bloque 2: Fundamentos del Lenguaje",
+                description: "Sintaxis básica, variables y tipos de datos",
+                day: 2,
+                topics: [
                     "¡Hola, mundo!",
                     "Estructura del código",
                     "El modo moderno, 'use strict'",
                     "Variables",
                     "Tipos de datos",
-                    "Interacción: alert, prompt, confirm"
+                    "Interacción: alert, prompt, confirm",
+                    "Conversiones de Tipos"
                 ]
             },
             {
-                day: 2,
-                title: "Día 2: Operadores y Control de Flujo",
+                id: 3,
+                title: "Bloque 3: Operadores y Control de Flujo",
+                description: "Operadores matemáticos y estructuras de control",
+                day: 3,
                 topics: [
-                    "Conversiones de Tipos",
                     "Operadores básicos, matemáticas",
                     "Comparaciones",
                     "Ejecución condicional: if, '?'",
                     "Operadores Lógicos",
                     "Operador Nullish Coalescing '??'",
                     "Bucles: while y for",
-                    "La sentencia 'switch'",
-                    "Funciones",
-                    "Expresiones de función"
+                    "La sentencia 'switch'"
                 ]
             },
             {
-                day: 3,
-                title: "Día 3: Calidad de Código y Objetos",
+                id: 4,
+                title: "Bloque 4: Funciones Básicas",
+                description: "Fundamentos de funciones en JavaScript",
+                day: 4,
                 topics: [
-                    "Funciones Flecha, lo básico",
+                    "Funciones",
+                    "Expresiones de función",
+                    "Funciones Flecha, lo básico"
+                ]
+            },
+            {
+                id: 5,
+                title: "Bloque 5: Calidad del Código",
+                description: "Buenas prácticas y herramientas de desarrollo",
+                day: 5,
+                topics: [
                     "Calidad del código",
                     "Debugging en el navegador",
                     "Estilo de codificación",
                     "Comentarios",
                     "Código ninja",
                     "Automatización de pruebas con Mocha",
-                    "Polyfills y transpiladores",
-                    "Objetos: lo básico",
-                    "Referencias de objetos y copia"
+                    "Polyfills y transpiladores"
                 ]
             },
             {
-                day: 4,
-                title: "Día 4: Métodos, Constructores y Tipos Avanzados",
+                id: 6,
+                title: "Bloque 6: Objetos y Propiedades",
+                description: "Fundamentos de objetos y su manipulación",
+                day: 6,
                 topics: [
+                    "Objetos: lo básico",
+                    "Referencias de objetos y copia",
                     "Recolección de basura",
                     "Métodos de objeto, 'this'",
                     "Constructor, operador 'new'",
                     "Encadenamiento opcional '?.'",
                     "Tipo Symbol",
-                    "Conversión de objeto a valor primitivo",
-                    "Métodos en tipos primitivos",
-                    "Números",
-                    "Strings",
-                    "Arrays"
+                    "Conversión de objeto a valor primitivo"
                 ]
             },
             {
-                day: 5,
-                title: "Día 5: Métodos de Arrays, Map, Set y Objetos",
+                id: 7,
+                title: "Bloque 7: Tipos de Datos y Métodos",
+                description: "Tipos de datos primitivos y sus métodos",
+                day: 7,
                 topics: [
-                    "Métodos de arrays",
+                    "Métodos en tipos primitivos",
+                    "Números",
+                    "Strings",
+                    "Arrays",
+                    "Métodos de arrays"
+                ]
+            },
+            {
+                id: 8,
+                title: "Bloque 8: Estructuras de Datos Avanzadas",
+                description: "Colecciones y estructuras de datos complejas",
+                day: 8,
+                topics: [
                     "Iterables",
                     "Map y Set",
                     "WeakMap y WeakSet",
                     "Object.keys, values, entries",
                     "Asignación desestructurante",
                     "Fecha y Hora",
-                    "Métodos JSON, toJSON",
-                    "Recursión y pila",
-                    "Parámetros Rest y operador Spread"
+                    "Métodos JSON, toJSON"
                 ]
             },
             {
-                day: 6,
-                title: "Día 6: Funciones Avanzadas y Programación",
+                id: 9,
+                title: "Bloque 9: Funciones Avanzadas",
+                description: "Funciones complejas y programación funcional",
+                day: 9,
                 topics: [
+                    "Recursión y pila",
+                    "Parámetros Rest y operador Spread",
                     "Ámbito de Variable y el concepto 'closure'",
                     "La vieja 'var'",
                     "Objeto Global",
@@ -505,72 +547,164 @@
                     "Planificación: setTimeout y setInterval",
                     "Decoradores y redirecciones, call/apply",
                     "Función bind: vinculación de funciones",
-                    "Funciones de flecha revisadas",
-                    "Configuración de las propiedades de objetos"
+                    "Funciones de flecha revisadas"
                 ]
             },
             {
-                day: 7,
-                title: "Día 7: Propiedades, Prototipos y Clases",
+                id: 10,
+                title: "Bloque 10: Objetos Avanzados",
+                description: "Propiedades avanzadas de objetos",
+                day: 10,
                 topics: [
+                    "Configuración de las propiedades de objetos",
                     "Indicadores y descriptores de propiedad",
-                    "'Getters' y 'setters' de propiedad",
+                    "'Getters' y 'setters' de propiedad"
+                ]
+            },
+            {
+                id: 11,
+                title: "Bloque 11: Prototipos y Herencia",
+                description: "Sistema de prototipos y herencia en JavaScript",
+                day: 11,
+                topics: [
                     "Prototipos y herencia",
                     "Herencia prototípica",
                     "F.prototype",
                     "Prototipos nativos",
-                    "Métodos prototipo, objetos sin __proto__",
-                    "Sintaxis básica de `class`",
-                    "Herencia de clase",
-                    "Propiedades y métodos estáticos"
+                    "Métodos prototipo, objetos sin __proto__"
                 ]
             },
             {
-                day: 8,
-                title: "Día 8: Clases Avanzadas y Manejo de Errores",
+                id: 12,
+                title: "Bloque 12: Clases ES6",
+                description: "Sintaxis moderna de clases en JavaScript",
+                day: 12,
                 topics: [
+                    "Sintaxis básica de `class`",
+                    "Herencia de clase",
+                    "Propiedades y métodos estáticos",
                     "Propiedades y métodos privados y protegidos",
                     "Ampliación de clases nativas",
                     "Comprobación de clase: 'instanceof'",
-                    "Los Mixins",
-                    "Manejo de errores, 'try...catch'",
-                    "Errores personalizados, extendiendo Error",
-                    "Introducción: callbacks",
-                    "Promesa",
-                    "Encadenamiento de promesas",
-                    "Manejo de errores con promesas"
+                    "Los Mixins"
                 ]
             },
             {
-                day: 9,
-                title: "Día 9: Promesas, Async/Await y Generadores",
+                id: 13,
+                title: "Bloque 13: Manejo de Errores",
+                description: "Control y manejo de errores en JavaScript",
+                day: 13,
                 topics: [
+                    "Manejo de errores, 'try...catch'",
+                    "Errores personalizados, extendiendo Error"
+                ]
+            },
+            {
+                id: 14,
+                title: "Bloque 14: Promesas y Async/Await",
+                description: "Programación asíncrona moderna",
+                day: 14,
+                topics: [
+                    "Introducción: callbacks",
+                    "Promesa",
+                    "Encadenamiento de promesas",
+                    "Manejo de errores con promesas",
                     "Promise API",
                     "Promisificación",
                     "Microtareas (Microtasks)",
-                    "Async/await",
+                    "Async/await"
+                ]
+            },
+            {
+                id: 15,
+                title: "Bloque 15: Generadores y Módulos",
+                description: "Generadores y sistema de módulos",
+                day: 15,
+                topics: [
                     "Generadores",
                     "Iteradores y generadores asíncronos",
                     "Módulos, introducción",
                     "Export e Import",
-                    "Importaciones dinámicas",
-                    "Proxy y Reflect"
+                    "Importaciones dinámicas"
                 ]
             },
             {
-                day: 10,
-                title: "Día 10: Temas Diversos y DOM",
+                id: 16,
+                title: "Bloque 16: Temas Diversos",
+                description: "Características avanzadas y especializadas",
+                day: 16,
                 topics: [
+                    "Proxy y Reflect",
                     "Eval: ejecutando una cadena de código",
                     "Currificación",
                     "Tipo de Referencia",
                     "BigInt",
                     "Unicode, String internals",
-                    "WeakRef y FinalizationRegistry",
+                    "WeakRef y FinalizationRegistry"
+                ]
+            },
+            {
+                id: 17,
+                title: "Bloque 17: DOM y Navegador",
+                description: "Interacción con el navegador y el DOM",
+                day: 17,
+                topics: [
                     "Entorno del navegador, especificaciones",
                     "Árbol del Modelo de Objetos del Documento (DOM)",
                     "Recorriendo el DOM",
-                    "Buscar: getElement*, querySelector*"
+                    "Buscar: getElement*, querySelector*",
+                    "Propiedades del nodo: tipo, etiqueta y contenido",
+                    "Atributos y propiedades",
+                    "Modificando el documento",
+                    "Estilos y clases",
+                    "Tamaño de elementos y desplazamiento",
+                    "Tamaño de ventana y desplazamiento",
+                    "Coordenadas"
+                ]
+            },
+            {
+                id: 18,
+                title: "Bloque 18: Eventos en el Navegador",
+                description: "Manejo de eventos y interacción del usuario",
+                day: 18,
+                topics: [
+                    "Introducción a los eventos en el navegador",
+                    "Propagación y captura",
+                    "Delegación de eventos",
+                    "Acciones predeterminadas del navegador",
+                    "Envío de eventos personalizados",
+                    "Eventos del Mouse",
+                    "Moviendo el mouse: mouseover/out, mouseenter/leave",
+                    "Arrastrar y Soltar con eventos del ratón",
+                    "Eventos de puntero",
+                    "Teclado: keydown y keyup",
+                    "Desplazamiento"
+                ]
+            },
+            {
+                id: 19,
+                title: "Bloque 19: Formularios y Recursos",
+                description: "Manejo de formularios y carga de recursos",
+                day: 19,
+                topics: [
+                    "Propiedades y Métodos de Formularios",
+                    "Enfocado: enfoque/desenfoque",
+                    "Eventos: change, input, cut, copy, paste",
+                    "Formularios: evento y método submit",
+                    "Página: DOMContentLoaded, load, beforeunload, unload",
+                    "Scripts: async, defer",
+                    "Carga de recursos: onload y onerror"
+                ]
+            },
+            {
+                id: 20,
+                title: "Bloque 20: Temas Avanzados del Navegador",
+                description: "Funcionalidades avanzadas del entorno web",
+                day: 20,
+                topics: [
+                    "Mutation observer",
+                    "Selection y Range",
+                    "Loop de eventos: microtareas y macrotareas"
                 ]
             }
         ];
@@ -579,19 +713,19 @@
         let progressState = {
             totalLessons: 0,
             completedLessons: 0,
-            days: []
+            blocks: []
         };
 
         // Inicializar el estado
         function initializeProgressState() {
             // Calcular el total de lecciones
             let totalLessons = 0;
-            courseData.forEach(day => {
-                totalLessons += day.topics.length;
-                progressState.days[day.day] = {
-                    total: day.topics.length,
+            courseData.forEach(block => {
+                totalLessons += block.topics.length;
+                progressState.blocks[block.id] = {
+                    total: block.topics.length,
                     completed: 0,
-                    topics: Array(day.topics.length).fill(false)
+                    topics: Array(block.topics.length).fill(false)
                 };
             });
             
@@ -602,35 +736,36 @@
             if (savedState) {
                 const parsedState = JSON.parse(savedState);
                 progressState.completedLessons = parsedState.completedLessons || 0;
-                progressState.days = parsedState.days || progressState.days;
+                progressState.blocks = parsedState.blocks || progressState.blocks;
             }
         }
 
-        // Renderizar los días
-        function renderDays() {
-            const container = document.getElementById('days-container');
+        // Renderizar los bloques
+        function renderBlocks() {
+            const container = document.getElementById('blocks-container');
             container.innerHTML = '';
             
-            courseData.forEach(dayData => {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'day-card';
+            courseData.forEach(blockData => {
+                const blockElement = document.createElement('div');
+                blockElement.className = 'block-card';
                 
-                const dayState = progressState.days[dayData.day];
-                const completedCount = dayState ? dayState.completed : 0;
+                const blockState = progressState.blocks[blockData.id];
+                const completedCount = blockState ? blockState.completed : 0;
                 
-                dayElement.innerHTML = `
-                    <div class="day-header">
-                        <h3 class="day-title">${dayData.title}</h3>
-                        <div class="day-counter">${dayData.day}</div>
+                blockElement.innerHTML = `
+                    <div class="block-header">
+                        <h3 class="block-title">${blockData.title}</h3>
+                        <div class="day-counter">Día ${blockData.day}</div>
                     </div>
+                    <p class="block-description">${blockData.description}</p>
                     <ul class="checklist">
-                        ${dayData.topics.map((topic, index) => {
-                            const isChecked = dayState && dayState.topics[index];
+                        ${blockData.topics.map((topic, index) => {
+                            const isChecked = blockState && blockState.topics[index];
                             return `
                                 <li class="checklist-item">
                                     <div class="checkbox-container">
                                         <div class="custom-checkbox ${isChecked ? 'checked' : ''}" 
-                                             data-day="${dayData.day}" 
+                                             data-block="${blockData.id}" 
                                              data-index="${index}"></div>
                                     </div>
                                     <span class="item-text ${isChecked ? 'completed' : ''}">
@@ -640,13 +775,13 @@
                             `;
                         }).join('')}
                     </ul>
-                    <div class="day-stats">
-                        <span>${completedCount}/${dayData.topics.length} completadas</span>
-                        <span>${dayData.topics.length} lecciones</span>
+                    <div class="block-stats">
+                        <span>${completedCount}/${blockData.topics.length} completadas</span>
+                        <span>${blockData.topics.length} lecciones</span>
                     </div>
                 `;
                 
-                container.appendChild(dayElement);
+                container.appendChild(blockElement);
             });
             
             // Añadir event listeners a los checkboxes
@@ -660,24 +795,24 @@
         // Alternar estado del checkbox
         function toggleCheckbox(event) {
             const checkbox = event.target;
-            const day = parseInt(checkbox.getAttribute('data-day'));
+            const blockId = parseInt(checkbox.getAttribute('data-block'));
             const index = parseInt(checkbox.getAttribute('data-index'));
             
             // Toggle del estado
             const isChecked = checkbox.classList.toggle('checked');
             
             // Actualizar estado en progressState
-            progressState.days[day].topics[index] = isChecked;
+            progressState.blocks[blockId].topics[index] = isChecked;
             
             // Actualizar contadores
-            const dayState = progressState.days[day];
-            dayState.completed = dayState.topics.filter(topic => topic).length;
+            const blockState = progressState.blocks[blockId];
+            blockState.completed = blockState.topics.filter(topic => topic).length;
             
             // Actualizar contador total
             progressState.completedLessons = 0;
-            progressState.days.forEach(day => {
-                if (day) {
-                    progressState.completedLessons += day.completed;
+            progressState.blocks.forEach(block => {
+                if (block) {
+                    progressState.completedLessons += block.completed;
                 }
             });
             
@@ -685,8 +820,8 @@
             const itemText = checkbox.closest('.checklist-item').querySelector('.item-text');
             itemText.classList.toggle('completed', isChecked);
             
-            const dayStats = checkbox.closest('.day-card').querySelector('.day-stats span:first-child');
-            dayStats.textContent = `${dayState.completed}/${dayState.total} completadas`;
+            const blockStats = checkbox.closest('.block-card').querySelector('.block-stats span:first-child');
+            blockStats.textContent = `${blockState.completed}/${blockState.total} completadas`;
             
             updateProgress();
             saveProgress();
@@ -705,16 +840,17 @@
             // Actualizar estadísticas
             document.getElementById('total-completed').textContent = progressState.completedLessons;
             
-            // Calcular días completados (días con todas las lecciones completadas)
-            let daysCompleted = 0;
-            courseData.forEach(dayData => {
-                const dayState = progressState.days[dayData.day];
-                if (dayState && dayState.completed === dayState.total) {
-                    daysCompleted++;
+            // Calcular bloques completados (bloques con todas las lecciones completadas)
+            let blocksCompleted = 0;
+            courseData.forEach(blockData => {
+                const blockState = progressState.blocks[blockData.id];
+                if (blockState && blockState.completed === blockState.total) {
+                    blocksCompleted++;
                 }
             });
             
-            document.getElementById('days-completed').textContent = daysCompleted;
+            document.getElementById('blocks-completed').textContent = blocksCompleted;
+            document.getElementById('total-lessons').textContent = progressState.totalLessons;
         }
 
         // Guardar progreso en localStorage
@@ -738,14 +874,14 @@
             if (confirm('¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.')) {
                 localStorage.removeItem('jsCourseProgress');
                 initializeProgressState();
-                renderDays();
+                renderBlocks();
             }
         }
 
         // Inicializar la aplicación
         function initApp() {
             initializeProgressState();
-            renderDays();
+            renderBlocks();
             
             // Añadir event listeners a los botones
             document.getElementById('reset-btn').addEventListener('click', resetProgress);
