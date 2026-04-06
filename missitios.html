@@ -1,180 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
-    }
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Ubuntu,
+          sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
 
-    body {
-      margin-top: 30px;
-      overflow: hidden;
-      min-height: 100vh;
-      padding-top: 50px;
-      padding-bottom: 100px;
-      padding: 16px;
-      background: linear-gradient(180deg, #f3f3f5, #e8e8ec);
-      color: #1f1f23;
-    }
+      body {
+        margin: 0;
+        padding: 16px;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f3f3f5, #e8e8ec);
+        color: #1f1f23;
+      }
 
-    .links {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
+      .links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
 
-    .item {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(180deg, #ffffff, #dddddf);
-      border-radius: 16px;
-      border: 1px solid #c8c8ce;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.10);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
+      .item {
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(180deg, #ffffff, #e4e4e8);
+        border-radius: 14px;
+        border: 1px solid #d0d0d6;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+        transition: transform 0.1s ease;
+      }
 
-    .item-content {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+      .item:active {
+        transform: scale(0.96);
+      }
 
-    .item:active {
-      transform: scale(0.97);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-    }
+      .item-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-    .label {
-      font-size: 0.95rem;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      text-align: center;
-    }
+      .label {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
 
-    .icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      background: #cfcfd6;
-      border-radius: 4px;
-    }
-  
-    .search-section {
-      margin-top: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+      .icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+      }
 
-    .search-section input {
-      width: 100%;
-      height: 56px;
-      border-radius: 16px;
-      border: 1px solid #c8c8ce;
-      padding: 0 18px;
-      font-size: 16px;
-      background: linear-gradient(180deg, #ffffff, #e6e6ea);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.10);
-      outline: none;
-    }
+      /* Buscadores */
+      .search-section {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
 
-    .search-section input::placeholder {
-      color: #666;
-    }
+      .search-form {
+        position: relative;
+      }
 
-    .search-section input:focus {
-      border-color: #999;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    }
+      .search-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+      }
 
+      .search-form input {
+        width: 100%;
+        height: 54px;
+        border-radius: 14px;
+        border: 1px solid #d0d0d6;
+        padding-left: 44px;
+        font-size: 15px;
+        background: linear-gradient(180deg, #ffffff, #e6e6ea);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+        outline: none;
+      }
 
-    .search-form {
-      position: relative;
-    }
+      .search-form input:focus {
+        border-color: #999;
+      }
+    </style>
+  </head>
 
-    .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-    }
+  <body>
+    <div class="links">
+      <a href="https://www.google.com/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/google.webp" loading="lazy" />
+            <div class="label">Google</div>
+          </div>
+        </div></a
+      >
 
-    .search-form input {
-      padding-left: 48px;
-    }
+      <a href="https://drive.google.com/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/google-drive.webp" loading="lazy" />
+            <div class="label">Drive</div>
+          </div>
+        </div></a
+      >
 
-</style>
-</head>
-<body>
+      <a href="https://m.youtube.com/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/youtube.webp" loading="lazy" />
+            <div class="label">YouTube</div>
+          </div>
+        </div></a
+      >
 
-  <div class="links">
+      <a href="https://www.rtve.es/noticias/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/periodico.webp" loading="lazy" />
+            <div class="label">Noticias</div>
+          </div>
+        </div></a
+      >
 
-    <!-- Uso diario -->
-    <a href="https://www.google.com/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/google.png" alt=""><div class="label">Google</div></div></div></a>
+      <a href="https://m.filmaffinity.com/es/main.php">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/filmaffinity.webp" loading="lazy" />
+            <div class="label">Filmaffinity</div>
+          </div>
+        </div></a
+      >
 
-    <a href="https://drive.google.com/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/google-drive.png" alt=""><div class="label">Drive</div></div></div></a>
+      <a href="https://liteapks.com/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/apk.webp" loading="lazy" />
+            <div class="label">LiteAPKs</div>
+          </div>
+        </div></a
+      >
 
-    <a href="https://m.youtube.com/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/youtube.png" alt=""><div class="label">YouTube</div></div></div></a>
+      <a href="https://x.com/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/x.webp" loading="lazy" />
+            <div class="label">X</div>
+          </div>
+        </div>
+      </a>
 
-     
+      <a href="https://gemini.google.com/">
+        <div class="item">
+          <div class="item-content">
+            <img class="icon" src="Img/gemini.webp" loading="lazy" />
+            <div class="label">Gemini</div>
+          </div>
+        </div>
+      </a>
+    </div>
 
-    <!-- Noticias y ocio -->
-    <a href="https://www.rtve.es/noticias/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/periodico.png" alt=""><div class="label">Noticias</div></div></div></a>
+    <div class="search-section">
+      <form
+        action="https://www.google.com/search"
+        method="get"
+        class="search-form"
+      >
+        <img src="Img/google.webp" class="search-icon" />
+        <input type="search" name="q" placeholder="Buscar en Google" />
+      </form>
 
-    <a href="https://www.rtve.es/play/internacional/portada/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/monitor.png" alt=""><div class="label">RTVE Play</div></div></div></a>
-
-    <a href="https://m.filmaffinity.com/es/main.php">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/filmaffinity.png" alt=""><div class="label">Filmaffinity</div></div></div></a>
-
-    <!-- Aprendizaje -->
-    
-    <a href="https://liteapks.com/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/apk.png" alt=""><div class="label">LiteAPKs</div></div></div></a>
-
-    <!-- Proyectos -->
-    <a href="https://ricaurtemascotas.free.nf/">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/gato.png" alt=""><div class="label">R. Mascotas</div></div></div></a>
-
-    <a href="https://animalandiavet.free.nf/index.html">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/veterinario.png" alt=""><div class="label">Animalandia</div></div></div></a>
-
-    <a href="https://viajemascotasibague.free.nf/index.html">
-      <div class="item"><div class="item-content"><img class="icon" src="Img/transportador.png" alt=""><div class="label">Viaje Mascotas</div></div></div></a>
-
-  </div>
-
-  <!-- Buscadores -->
-  <div class="search-section">
-    <form action="https://www.google.com/search" method="get" target="_self" class="search-form">
-      <img src="https://www.google.com/favicon.ico" alt="Google" class="search-icon">
-      <input type="search" name="q" placeholder="Buscar en Google" aria-label="Buscar en Google">
-    </form>
-
-    <form action="https://www.bing.com/search" method="get" target="_self" class="search-form">
-      <img src="https://www.bing.com/favicon.ico" alt="Bing" class="search-icon">
-      <input type="search" name="q" placeholder="Buscar en Bing" aria-label="Buscar en Bing">
-    </form>
-  </div>
-
-</body>
+      <form
+        action="https://www.bing.com/search"
+        method="get"
+        class="search-form"
+      >
+        <img src="Img/bing.webp" class="search-icon" />
+        <input type="search" name="q" placeholder="Buscar en Bing" />
+      </form>
+    </div>
+  </body>
 </html>
